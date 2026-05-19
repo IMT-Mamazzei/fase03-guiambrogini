@@ -45,7 +45,7 @@ precedence left MUL_OP;
 start with program;
 
 /* TODO 2: Como definir um programa que é uma lista de comandos? */
-program ::= stmt_list ; /* Escreva a regra aqui */ ;
+program ::= stmt_list ;
 
 /* TODO 3: Como definir uma lista recursiva no BNF? */
 stmt_list ::= stmt_list stmt

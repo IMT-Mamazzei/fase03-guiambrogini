@@ -86,6 +86,7 @@ OversizedIdentifier = {Letter}({Letter}|{Digit}|_){32}({Letter}|{Digit}|_)*
     /* Identificadores grandes demais (Captura o erro) */
     {OversizedIdentifier} { throw new RuntimeException("Erro Léxico: Identificador gigante -> " + yytext()); }
     {Identifier}          { return symbol(sym.ID, yytext()); }
+    {Number}              { return symbol(sym.NUMBER, yytext()); }
     /* Fallback: Qualquer outro caractere não reconhecido gera um Erro */
     .   {throw new RuntimeException("Erro Léxico: Caractere Ilegal -> " + yytext()); }
 }

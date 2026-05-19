@@ -80,16 +80,8 @@ OversizedIdentifier = {Letter}({Letter}|{Digit}|_){32}({Letter}|{Digit}|_)*
     "*" | "/" | "%" { return symbol(sym.MUL_OP, yytext()); }
 
     /* Regras para as Macros */
-        {Identifier}    {
-        if (yytext().length() > 32) {
-            throw new RuntimeException("Erro Lexico: Identificador grande demais -> " + yytext());
-        }
-        return symbol(sym.ID, yytext());
-    }
-    {Number}        { return symbol(sym.NUMBER, yytext()); }
 
-    .               { throw new RuntimeException("Erro Lexico: Caractere ilegal -> " + yytext()); }
-}
+
 
     /* Identificadores grandes demais (Captura o erro) */
     {OversizedIdentifier} { throw new RuntimeException("Erro Léxico: Identificador gigante -> " + yytext()); }

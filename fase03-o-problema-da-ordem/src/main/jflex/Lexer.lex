@@ -38,7 +38,7 @@ Number = [0-9]+(\.[0-9]+)?([Ee][+-]?[0-9]+)?
 Letter = [a-zA-Z]
 Digit  = [0-9]
 Identifier = {Letter}({Letter}|{Digit}|_){0,31}
-OversizedIdentifier = {Letter}({Letter}|{Digit}|_){32,}
+OversizedIdentifier = {Letter}({Letter}|{Digit}|_){32}({Letter}|{Digit}|_)*
 
 %%
 /* ========================================================================= */
@@ -92,8 +92,8 @@ OversizedIdentifier = {Letter}({Letter}|{Digit}|_){32,}
 }
 
     /* Identificadores grandes demais (Captura o erro) */
-   {OversizedIdentifier} { throw new RuntimeException("Erro Léxico: Identificador gigante -> " + yytext()); }
-
+    {OversizedIdentifier} { throw new RuntimeException("Erro Léxico: Identificador gigante -> " + yytext()); }
+    {Identifier}          { return symbol(sym.ID, yytext()); }
     /* Fallback: Qualquer outro caractere não reconhecido gera um Erro */
     .   {throw new RuntimeException("Erro Léxico: Caractere Ilegal -> " + yytext()); }
 }
